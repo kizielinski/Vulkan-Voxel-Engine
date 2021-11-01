@@ -31,6 +31,9 @@
     <ClCompile Include="VulkanInstallTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Voxel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vert">
@@ -43,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SetUpStructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Voxel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
