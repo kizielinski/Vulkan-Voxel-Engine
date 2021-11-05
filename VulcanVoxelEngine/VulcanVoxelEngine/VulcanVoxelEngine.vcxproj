@@ -87,7 +87,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\stb_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glm;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glfw-3.3.4.bin.WIN64\include;$(VULKAN_SDK)\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\tinyobjloader_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\stb_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glm;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glfw-3.3.4.bin.WIN64\include;$(VULKAN_SDK)\Include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -106,7 +106,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\stb_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glm;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glfw-3.3.4.bin.WIN64\include;$(VULKAN_SDK)\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\tinyobjloader_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\stb_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glm;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glfw-3.3.4.bin.WIN64\include;$(VULKAN_SDK)\Include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -127,7 +127,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\stb_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glm;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glfw-3.3.4.bin.WIN64\include;$(VULKAN_SDK)\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\tinyobjloader_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\stb_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glm;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glfw-3.3.4.bin.WIN64\include;$(VULKAN_SDK)\Include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -150,7 +150,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\stb_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glm;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glfw-3.3.4.bin.WIN64\include;$(VULKAN_SDK)\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\tinyobjloader_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\stb_master;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glm;C:\Users\shot2\OneDrive\Documents\Visual Studio 2019\Libraries\glfw-3.3.4.bin.WIN64\include;$(VULKAN_SDK)\Include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -166,6 +166,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HelloTriangle.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Voxel.cpp" />
     <ClCompile Include="VulkanInstallTest.cpp" />
   </ItemGroup>
@@ -175,7 +176,9 @@
     <None Include="shader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Model.h" />
     <ClInclude Include="SetUpStructs.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="Voxel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

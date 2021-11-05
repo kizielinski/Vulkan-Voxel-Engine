@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include <vector>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 //Combinations of these enum values add up to the necessary spec.
 //For example 4 + 8 = 12 so that means it's Forward & Backward equals X_Axis;
@@ -23,6 +26,12 @@ public:
 	~Voxel();
 
 private:
+
+	struct Vertex {
+
+	};
+
+	//vector<Vertex> CreateBounds();
 	std::string voxelName;
 	uint32_t globalId;
 	uint32_t localId;
