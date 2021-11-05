@@ -165,8 +165,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="HelloTriangle.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Voxel.cpp" />
     <ClCompile Include="VulkanInstallTest.cpp" />
   </ItemGroup>
@@ -176,8 +178,10 @@
     <None Include="shader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="SetUpStructs.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Voxel.h" />
   </ItemGroup>
