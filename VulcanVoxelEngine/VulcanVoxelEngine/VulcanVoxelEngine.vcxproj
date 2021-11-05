@@ -166,11 +166,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="HelloTriangle.cpp" />
+    <ClCompile Include="Chunk.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Voxel.cpp" />
     <ClCompile Include="VulkanInstallTest.cpp" />
+    <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="compile.bat" />
@@ -179,11 +181,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Chunk.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="SetUpStructs.h" />
+    <ClInclude Include="StandardVoxel.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Voxel.h" />
+    <ClInclude Include="world.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

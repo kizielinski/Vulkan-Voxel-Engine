@@ -1,5 +1,9 @@
 #include "world.h"
 
+World::World()
+{
+}
+
 World::World(int _chunkCount)
 {
     chunkCount = _chunkCount;
@@ -15,7 +19,7 @@ int World::GetChunkCount()
     return chunks.size();
 }
 
-Chunk World::GetChunkByIndex(int index)
+Chunk* World::GetChunkByIndex(int index)
 {
     return chunks[index];
 }
@@ -24,8 +28,8 @@ void World::CreateChunks()
 {
     for (int i = 0; i < chunkCount; i++)
     {
-        chunks.push_back(Chunk());
-        GenerateVoxels(chunks[chunks.size() - 1].dimensions);
+        chunks.push_back(new Chunk());
+        GenerateVoxels(chunks[chunks.size() - 1]->dimensions);
     }
 }
 
@@ -35,7 +39,7 @@ void World::GenerateVoxels(glm::vec3 dimensions)
         for (int y = 0; y < dimensions.y; y++) {
             for (int z = 0; z < dimensions.z; z++)
             {
-                voxels.push_back(Voxel(glm::vec3(x, y, z)));
+                voxels.push_back(new Voxel(glm::vec3(x, y, z)));
             }
         }
     }

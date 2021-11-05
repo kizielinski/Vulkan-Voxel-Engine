@@ -23,11 +23,11 @@
     <Filter Include="Shaders\FragmentShaders">
       <UniqueIdentifier>{7d8ce8e4-ccc7-4a08-9cdd-6dfe7570d76b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Voxel Definitions">
+      <UniqueIdentifier>{ad5e44f7-d88f-451e-adff-1274b3bfc740}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HelloTriangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VulkanInstallTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,6 +41,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="world.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,9 +66,6 @@
     <ClInclude Include="SetUpStructs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Voxel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -70,6 +76,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Voxel.h">
+      <Filter>Header Files\Voxel Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardVoxel.h">
+      <Filter>Header Files\Voxel Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

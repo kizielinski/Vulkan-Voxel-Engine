@@ -2,7 +2,11 @@
 //10/06/2021
 //Began my Vulkan adventure here https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Base_code
 //Ended by drawing a triangle here https://vulkan-tutorial.com/Drawing_a_triangle/Drawing/Rendering_and_presentation
-//Hello triangle? First Vulkan render! TIme: 8+ Hours
+
+//11/05/2021 Update: Finished renderer implementation and began researching voxel implementations.
+//Ex: https://github.com/Hopson97/open-builder/blob/master/src/common/common/world/chunk.h
+//Ex: https://stackoverflow.com/questions/27810937/how-do-you-store-voxel-data
+//Cube Rendering and Voxels? Time: 30+ Hours
 #pragma region Includes
 #define GLFW_INCLUDE_VULKAN
 #define VK_USE_PLATFORM_WIN32_KHR
@@ -40,7 +44,7 @@
 #include <iostream>
 #include <array>
 #include "Vertex.h"
-#include "Voxel.h"
+#include "world.h"
 #pragma endregion
 using namespace std;
 
@@ -99,45 +103,7 @@ struct SwapChainSupportDetails {
 	std::vector<VkPresentModeKHR> presentModes;
 };
 
-//struct Vertex {
-//	glm::vec3 pos;
-//	glm::vec3 color;
-//	glm::vec2 texCoord;
-//
-//	static VkVertexInputBindingDescription getBindingDescription() {
-//		VkVertexInputBindingDescription bindingDescription{};
-//		bindingDescription.binding = 0;
-//		bindingDescription.stride = sizeof(Vertex);
-//		bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-//
-//		return bindingDescription;
-//	}
-//
-//	bool operator==(const Vertex& other) const {
-//		return pos == other.pos && color == other.color && texCoord == other.texCoord;
-//	}
-//
-//	static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions() {
-//		std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions{};
-//
-//		attributeDescriptions[0].binding = 0;
-//		attributeDescriptions[0].location = 0;
-//		attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
-//		attributeDescriptions[0].offset = offsetof(Vertex, pos);
-//
-//		attributeDescriptions[1].binding = 0;
-//		attributeDescriptions[1].location = 1;
-//		attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
-//		attributeDescriptions[1].offset = offsetof(Vertex, color);
-//
-//		attributeDescriptions[2].binding = 0;
-//		attributeDescriptions[2].location = 2;
-//		attributeDescriptions[2].format = VK_FORMAT_R32G32_SFLOAT;
-//		attributeDescriptions[2].offset = offsetof(Vertex, texCoord);
-//
-//		return attributeDescriptions;
-//	}
-//};
+World myWorld;
 
 struct UniformBufferObject {
 	alignas(16) glm::mat4 model;
@@ -149,7 +115,7 @@ const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
 
 const std::string MODEL_PATH = "models/cube.obj";
-const std::string TEXTURE_PATH = "textures/minimush.png";
+const std::string TEXTURE_PATH = "textures/square.jpg";
 
 #pragma endregion
 
@@ -163,7 +129,9 @@ public:
 		cleanup();
 	}
 private:
-#pragma region Fields
+
+
+#pragma region RendererFields
 
 	VkInstance instance;
 	VkDevice device;
@@ -235,6 +203,8 @@ private:
 	VkDeviceMemory depthImageMemory;
 	VkImageView depthImageView;
 
+	World temp;
+
 	bool framebufferResized = false;
 #pragma endregion
 
@@ -275,6 +245,9 @@ private:
 		createTextureImage();
 		createTextureImageView();
 		createTextureSampler();
+
+		temp = World(2);
+
 		loadModel();
 		createVertexBuffer();
 		createIndexBuffer();

@@ -44,12 +44,11 @@ public:
 	~Voxel();
 
 	void SetTexture(int index, string textureFile);
-	uint32_t GetGlobalID();
+	/*uint32_t GetGlobalID();
 	uint32_t GetLocalID();
-	glm::vec3 GetPosition();
-	VoxelData AccessDataStruct();
-
+	glm::vec3 GetPosition();*/
+	glm::vec3 position;
 private:
-	VoxelData vData;
+	
 };
 
