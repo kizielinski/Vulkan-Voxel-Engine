@@ -17,7 +17,7 @@ To run my code, please download and install the following:
   o	glfw-3.3.4.bin.WIN64
 References
 •	I’m using these two sites as of right now to foster my understanding of Vulkan and voxel engines:
-  o	https://vulkan-tutorial.com/Introduction (Currently at the end of Uniform Buffers by the submission date, which can be seen on the side navigation panel)
+  o	https://vulkan-tutorial.com/Introduction
   o	https://dev.to/nomoredeps/making-a-voxel-engine-46h8
   o	https://vkguide.dev/ 
   o	https://github.com/SaschaWillems/Vulkan#Basics 
