@@ -2,23 +2,35 @@
 
 #include "Chunk.h"
 #include "Voxel.h"
+#include "Node.h"
+#include <vector>
+
+struct Vector3D 
+{
+	float x;
+	float y;
+	float z;
+};
 
 class World
 {
 public:
 	World();
-	World(int _chunkCount);
+	World(Vector3D dimensions);
+	World(int _chunkCount, Vector3D dimensions);
 	~World();
 	int GetChunkCount();
 	Chunk* GetChunkByIndex(int index);
-	void CreateChunks();
-	void GenerateVoxels(glm::vec3 dimensions);
+	void CreateChunks(Vector3D dimensions);
+	void GenerateVoxels(Vector3D dimensions);
+	std::vector<Node*> GetNodes();
 private:
 	int chunkCount;
-	vector<Chunk*> chunks; //Straight forward vector
+	std::vector<Chunk*> chunks; //Straight forward vector
 	//Heuristic for accessing voxels. 
 	//ChunkID * its ChunkSize brings you to the end of that chunk.
-	vector<Voxel*> voxels;
+	std::vector<Voxel*> voxels;
+	std::vector<Node*> nodes; 
 
 };
 

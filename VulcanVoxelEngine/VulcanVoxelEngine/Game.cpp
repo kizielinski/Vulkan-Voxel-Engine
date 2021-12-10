@@ -24,7 +24,8 @@
 #include <stb_image.h>
 
 #define TINYOBJLOADER_IMPLEMENTATION
-#include <tiny_obj_loader.h>
+//#include <tiny_obj_loader.h>
+//#include "Model.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -43,7 +44,6 @@
 #include <fstream>
 #include <iostream>
 #include <array>
-#include "Vertex.h"
 #include "world.h"
 #pragma endregion
 using namespace std;
@@ -103,7 +103,7 @@ struct SwapChainSupportDetails {
 	std::vector<VkPresentModeKHR> presentModes;
 };
 
-World myWorld;
+//World myWorld;
 
 struct UniformBufferObject {
 	alignas(16) glm::mat4 model;
@@ -176,7 +176,8 @@ private:
 	size_t currentFrame = 0;
 
 	//Model Information
-	std::vector<Model*> models;
+	World myWorld;
+	std::vector<Node*> nodes;
 	std::vector<Vertex> vertices;
 	std::vector<uint32_t> indices;
 
@@ -203,9 +204,9 @@ private:
 	VkDeviceMemory depthImageMemory;
 	VkImageView depthImageView;
 
-	World temp;
-
 	bool framebufferResized = false;
+
+	Node* node;
 #pragma endregion
 
 #pragma region Core
@@ -246,12 +247,19 @@ private:
 		createTextureImageView();
 		createTextureSampler();
 
-		temp = World(2);
+		myWorld = World(1, { 8, 8, 2 });
 
-		loadModel();
+		/*glm::vec3 temp = { 1, -1, 0 };
+		Node* nodeSecond = new Node(temp.x, temp.y, temp.z);
+		nodes.push_back(nodeSecond);
+		glm::vec3 temp2 = { 0, -1, 0 };
+		nodeSecond = new Node(temp2.x, temp2.y, temp2.z);
+		nodes.push_back(nodeSecond);*/
+		loadAllVerticesAndIndices();
 		createVertexBuffer();
 		createIndexBuffer();
 		createUniformBuffers();
+
 		createDescriptorPool();
 		createDescriptorSets();
 		createCommandBuffers();
@@ -806,7 +814,7 @@ private:
 		allocInfo.descriptorSetCount = static_cast<uint32_t>(swapChainImages.size());
 		allocInfo.pSetLayouts = layouts.data();
 
-		descriptorSets.resize(swapChainImages.size());
+		descriptorSets.resize(swapChainImages.size()); 
 		if (vkAllocateDescriptorSets(device, &allocInfo, descriptorSets.data()) != VK_SUCCESS) {
 			throw std::runtime_error("failed to allocate descriptor sets!");
 		}
@@ -1091,10 +1099,29 @@ private:
                 vkCmdBindVertexBuffers(commandBuffers[i], 0, 1, vertexBuffers, offsets);
 
                 vkCmdBindIndexBuffer(commandBuffers[i], indexBuffer, 0, VK_INDEX_TYPE_UINT32);
+				int vertexCount = 0;
+				/*for (uint32_t j = 0; j < nodes.size(); j++)
+				{
+					uint32_t dynamicOffset = j * 256;
 
-                vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &descriptorSets[i], 0, nullptr);
+					int verticesToDraw = 12;
 
-                vkCmdDrawIndexed(commandBuffers[i], static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
+					vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &descriptorSets[i], 1, &dynamicOffset);
+					vkCmdDraw(commandBuffers[i], verticesToDraw, 1, vertexCount, 0);
+
+					vertexCount += verticesToDraw;
+				}*/
+				
+               /* vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &descriptorSets[i], 0, nullptr);
+                vkCmdDrawIndexed(commandBuffers[i], static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);*/
+
+				for (uint32_t j = 0; j < nodes.size(); j++)
+				{
+					int drawnVertices = nodes[j]->model->ReturnIndexVectorSize();
+					int vertexCount = 20;
+					vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &descriptorSets[i], 0, nullptr);
+					vkCmdDrawIndexed(commandBuffers[i], drawnVertices, 1, 0, j * vertexCount, 0);
+				}
 
             vkCmdEndRenderPass(commandBuffers[i]);
 
@@ -1353,7 +1380,7 @@ private:
 	}
 
 	void createVertexBuffer() {
-		//VkDeviceSize bufferSize = sizeof(models[0]->ReturnVertex(0)) * models[0]->ReturnVertexVectorSize();
+		//vector<Vertex> vertices = nodes[0]->model->ReturnVertices();
 		VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
 		
 		VkBuffer stagingBuffer;
@@ -1384,8 +1411,8 @@ private:
 
 	void createIndexBuffer()
 	{
-		//VkDeviceSize bufferSize = sizeof(models[0]->ReturnIndex(0)) * models[0]->ReturnIndexVectorSize();
-		VkDeviceSize bufferSize = sizeof(indices[0]) * indices.size();
+		//indices = nodes[0]->model->ReturnIndices();
+		VkDeviceSize bufferSize = sizeof(uint32_t) * indices.size();
 		VkBuffer stagingBuffer;
 		VkDeviceMemory stagingBufferMemory;
 		//createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
@@ -1403,6 +1430,27 @@ private:
 
 		vkDestroyBuffer(device, stagingBuffer, nullptr);
 		vkFreeMemory(device, stagingBufferMemory, nullptr);
+	}
+
+	void loadAllVerticesAndIndices()
+	{
+		nodes = myWorld.GetNodes();
+
+		for (auto n : nodes) {
+
+			vector<uint32_t> tempIndices = n->model->ReturnIndices();
+			vector<Vertex> tempVertices = n->model->ReturnVertices();
+
+			for (auto v : tempVertices)
+			{
+				vertices.push_back(v);
+			}
+
+			for (auto i : tempIndices)
+			{
+				indices.push_back(i);
+			}
+		}
 	}
 
 	void updateUniformBuffer(uint32_t currentImage) {
@@ -1426,59 +1474,6 @@ private:
 #pragma endregion
 
 #pragma region Textures/ModelLoading&Creation
-
-	void loadModel(){
-		tinyobj::attrib_t attrib;
-		std::vector<tinyobj::shape_t> shapes;
-		std::vector<tinyobj::material_t> materials;
-		std::string warn, err;
-
-		if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, MODEL_PATH.c_str())) {
-			throw std::runtime_error(warn + err);
-		}
-
-		Model* m = new Model();
-
-		unordered_map<Vertex, uint32_t> uniqueVertices{};
-
-		for (const auto& shape : shapes) {
-			for (const auto& index : shape.mesh.indices) {
-				Vertex vertex{};
-
-				vertex.pos = {
-					attrib.vertices[3 * index.vertex_index + 0],
-					attrib.vertices[3 * index.vertex_index + 1],
-					attrib.vertices[3 * index.vertex_index + 2]
-				};
-
-				vertex.texCoord = {
-					attrib.texcoords[2 * index.texcoord_index + 0],
-					1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
-				};
-
-				vertex.color = { 1.0f, 1.0f, 1.0f };
-
-				size_t one;
-				size_t two;
-				size_t three;
-
-				if (uniqueVertices.count(vertex) == 0) {
-					uniqueVertices[vertex] = static_cast<uint32_t>(vertices.size());
-					vertices.push_back(vertex);
-					one = sizeof(vertices[0]);
-					uniqueVertices[vertex] = static_cast<uint32_t>(m->ReturnVertexVectorSize());
-					m->PushVertex(new Vertex(vertex));
-					two = sizeof(m->ReturnVertex(0));
-					three = sizeof(vertex);
-					int x = 0;
-				}
-
-				m->PushIndex(new uint32_t(uniqueVertices[vertex]));
-				indices.push_back(uniqueVertices[vertex]);
-			}
-		}
-		models.push_back(m);
-	}
 
 	void createTextureImage(){
 		int texWidth, texHeight, texChannels;

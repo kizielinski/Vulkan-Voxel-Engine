@@ -168,8 +168,9 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Chunk.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="NodeModel.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="NodeTransform.cpp" />
     <ClCompile Include="Voxel.cpp" />
     <ClCompile Include="VulkanInstallTest.cpp" />
     <ClCompile Include="world.cpp" />
@@ -182,10 +183,11 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Chunk.h" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="NodeModel.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="NodeTransform.h" />
     <ClInclude Include="SetUpStructs.h" />
     <ClInclude Include="StandardVoxel.h" />
-    <ClInclude Include="Transform.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Voxel.h" />
     <ClInclude Include="world.h" />

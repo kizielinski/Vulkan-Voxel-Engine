@@ -1,8 +1,6 @@
-#include "Transform.h"
+#include "NodeTransform.h"
 //#include <DirectXMath.h>
 #include <Windows.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
 class Camera
 {
@@ -25,6 +23,6 @@ public:
 private:
 	glm::mat4x4 viewMatrix;
 	glm::mat4x4 projectionMatrix;
-	Transform transform;
+	NodeTransform transform;
 	POINT prevMousePosition;
 };

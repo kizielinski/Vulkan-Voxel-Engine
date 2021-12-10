@@ -9,7 +9,7 @@ Voxel::~Voxel()
 {
 }
 
-void Voxel::SetTexture(int index, string textureFile)
+void Voxel::SetTexture(int index, std::string textureFile)
 {
 }
 
