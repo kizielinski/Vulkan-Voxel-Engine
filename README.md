@@ -17,10 +17,8 @@ To run my code, please download and install the following:
   *	GLM-0.9.9.8
   *	glfw-3.3.4.bin.WIN64
 References
-*	I’m using these two sites as of right now to foster my understanding of Vulkan and voxel engines:
+*	I’m using these four sites as of right now to foster my understanding of Vulkan and voxel engines:
   *	https://vulkan-tutorial.com/Introduction
   *	https://dev.to/nomoredeps/making-a-voxel-engine-46h8
   *	https://vkguide.dev/ 
   *	https://github.com/SaschaWillems/Vulkan#Basics 
-
-
